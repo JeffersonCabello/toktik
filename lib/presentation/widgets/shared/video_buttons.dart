@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toktik/config/helpers/human_formats.dart';
 import 'package:toktik/domain/entities/video_post.dart';
 
 class VideoButtons extends StatelessWidget {
@@ -13,7 +14,9 @@ class VideoButtons extends StatelessWidget {
         _CustomIconButton(
             value: video.likes,
             iconData: Icons.favorite,
-            iconColor: Colors.blue)
+            iconColor: Colors.blue),
+        _CustomIconButton(
+            value: video.views, iconData: Icons.remove_red_eye_outlined)
       ],
     );
   }
@@ -23,6 +26,7 @@ class _CustomIconButton extends StatelessWidget {
   final int value;
   final IconData iconData;
   final Color? color;
+
   const _CustomIconButton(
       {required this.value, required this.iconData, iconColor})
       : color = iconColor ?? Colors.white;
@@ -38,7 +42,7 @@ class _CustomIconButton extends StatelessWidget {
               color: color,
               size: 30,
             )),
-        Text("$value")
+        Text(HumanFormats.humanReadableNumber(value.toDouble()))
       ],
     );
   }
